@@ -15,6 +15,7 @@ export class AuthController {
 
     @Get('github/login/return')
     async githubAuthLogin(@Req() req: Request, @Res() res: Response) {
-        return await this.authService.githubAuthLogin(req);
+        const data = await this.authService.githubAuthLogin(req);
+        res.json(data);
     }
 }

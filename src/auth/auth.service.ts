@@ -10,13 +10,13 @@ export class AuthService {
     ) { }
 
     async githubAuthenticate(res: Response) {
-        res.redirect(`https://github.com/login/oauth/authorize?client_id=${this.configService.get<string>('github.clientId')}&scope=repo`);
+        res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=repo`);
     }
 
     async githubAuthLogin(req: Request) {
         const body = {
-            client_id: this.configService.get<string>('github.clientId'),
-            client_secret: this.configService.get<string>('github.clientSecret'),
+            client_id: process.env.GITHUB_CLIENT_ID,
+            client_secret: process.env.GITHUB_CLIENT_SECRET,
             code: req.query.code
         };
         const opts = { headers: { accept: 'application/json' } };
