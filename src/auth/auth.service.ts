@@ -23,6 +23,6 @@ export class AuthService {
         const metaData = await this.httpService
             .post(`https://github.com/login/oauth/access_token`, body, opts)
             .toPromise();
-        return metaData;
+        return metaData.data;
     }
 }

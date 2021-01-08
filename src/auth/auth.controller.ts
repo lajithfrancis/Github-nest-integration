@@ -8,7 +8,7 @@ export class AuthController {
         private readonly authService: AuthService
     ) { }
 
-    @Get('/github')
+    @Get('github')
     async githubAuthenticate(@Res() res: Response) {
         return this.authService.githubAuthenticate(res);
     }
