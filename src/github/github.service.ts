@@ -8,10 +8,13 @@ export class GithubService {
     ) { }
 
     async getGithubUserEvents(query: UserEventQuery) {
-        let { username, githubAccessToken } = query;
+        let { githubAccessToken } = query;
         const opts = { headers: { accept: 'application/vnd.github.v3+json', Authorization: `token ${githubAccessToken}` } };
+        const user = await this.httpService
+            .get(`https://api.github.com/user`, opts)
+            .toPromise();
         const metaData = await this.httpService
-            .get(`https://api.github.com/users/${username}/events`, opts)
+            .get(`https://api.github.com/users/${user.data.login}/events`, opts)
             .toPromise();
         return metaData.data;
     }
