@@ -7,8 +7,14 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService
     ) { }
+
     @Get('/github')
-    async githubAuthenticate(@Req() req: Request, @Res() res: Response) {
+    async githubAuthenticate(@Res() res: Response) {
         return this.authService.githubAuthenticate(res);
+    }
+
+    @Get('github/login/return')
+    async githubAuthLogin(@Req() req: Request, @Res() res: Response) {
+        return await this.authService.githubAuthLogin(req);
     }
 }
